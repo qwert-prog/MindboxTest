@@ -2,7 +2,7 @@
 
 namespace ShapeLibrary.Models
 {
-    public sealed class Circle : Shape
+    public class Circle : Shape
     {
         private double _radius;
 

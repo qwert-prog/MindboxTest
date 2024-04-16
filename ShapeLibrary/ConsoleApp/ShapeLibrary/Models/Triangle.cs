@@ -2,7 +2,7 @@
 
 namespace ShapeLibrary.Models
 {
-    public sealed class Triangle : Shape
+    public class Triangle : Shape
     {
         /// <summary>
         /// Первая сторона треугольника.
@@ -68,7 +68,7 @@ namespace ShapeLibrary.Models
             return area;
         }
 
-        private bool IsRight()
+        public bool IsRight()
         {
             double[] sides = [A, B, C];
 
@@ -89,7 +89,7 @@ namespace ShapeLibrary.Models
                 }
             }
 
-            return longSidePow2 == smallSidesPow2;
+            return Math.Abs(longSidePow2 - smallSidesPow2) < 0.00001;
         }
     }
 }
