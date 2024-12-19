@@ -1,36 +1,45 @@
-﻿using ShapeLibrary.Models.Abstracts;
+using ShapeLibrary.Models.Interfaces;
 
-namespace ShapeLibrary.Models
+namespace ShapeLibrary.Models;
+
+/// <summary>
+/// Круг.
+/// </summary>
+public class Circle: IShape
 {
-    public class Circle : Shape
+    /// <summary>
+    /// Радиус круга.
+    /// </summary>
+    private double _radius;
+
+    /// <summary>
+    /// <inheritdoc cref="_radius"/>
+    /// </summary>
+    /// <exception cref="ArgumentException">Некорректный радиус.</exception>
+    public double Radius
     {
-        private double _radius;
-
-        /// <summary>
-        /// Радиус круга.
-        /// </summary>
-        public double Radius
+        get => _radius;
+        private set
         {
-            get => _radius;
-            private set
+            if(value is 0 or < 0)
             {
-                if (value is 0 or < 0)
-                {
-                    throw new ArgumentException("Радиус не может быть меньше или равен 0.");
-                }
-
-                if (_radius != value)
-                {
-                    _radius = value;
-                }
+                throw new ArgumentException("Радиус не может быть меньше или равен 0.");
             }
-        }
 
-        public Circle(double radius)
-        {
-            Radius = radius;
-        }
+            if(_radius == value)
+            {
+                return;
+            }
 
-        public override double Area() => Math.PI * Math.Pow(Radius, 2);
+            _radius = value;
+        }
     }
+
+    /// <summary>
+    /// Инициализирует круг.
+    /// </summary>
+    /// <param name="radius">Радиус круга.</param>
+    public Circle(double radius) => Radius = radius;
+
+    public double Area() => Math.PI * Math.Pow(Radius, 2);
 }
